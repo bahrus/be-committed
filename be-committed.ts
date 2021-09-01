@@ -1,13 +1,6 @@
 import {XtalDecor, XtalDecorCore} from 'xtal-decor/xtal-decor.js';
 import {CE} from 'trans-render/lib/CE.js';
 
-// export class BeCommitted extends XtalDecor{
-// }
-
-// interface HasSelf{
-//     self: HTMLInputElement
-// }
-
 const ce = new CE<XtalDecorCore<HTMLInputElement>>({
     config:{
         tagName: 'be-committed',
@@ -23,9 +16,10 @@ const ce = new CE<XtalDecorCore<HTMLInputElement>>({
                 const clickableElement = (self.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
                 if(clickableElement === null){
                     console.error('Unable to locate target');
+                    //TODO:  turn xtal-decor  attach forwarded second half into reusable function.  Use it here
                     return;
                 }
-                self.addEventListener('keyup', e =>{
+                self.addEventListener('keyup', (e: KeyboardEvent) =>{
                     if(e.key === 'Enter'){
                         e.preventDefault();
                         clickableElement.click()
@@ -34,9 +28,7 @@ const ce = new CE<XtalDecorCore<HTMLInputElement>>({
                 });
             }
         ],
-        init: (self: HTMLInputElement) => {
-
-        }
+        init: (self: HTMLInputElement) => {}
     },
     superclass: XtalDecor
 });
