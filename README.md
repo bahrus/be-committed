@@ -1,5 +1,7 @@
 # be-committed
 
+be-committed encapsulates and makes declarative a snippet of code that is likely found [frequently in various web site](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp). In particular, rigger a button click on keyboard "enter."
+
 <a href="https://nodei.co/npm/hypo-link/"><img src="https://nodei.co/npm/be-committed.png"></a>
 
 <img src="https://badgen.net/bundlephobia/minzip/be-committed">
@@ -8,8 +10,20 @@
 
 ```html
 <label for=url>Enter Url</label>
-<input id=url be-committed='{"to": "myButton"}'>
-<button id=myButton>Search</button>
+<input id=url be-committed='{"to": "change"}'>
+<button id=change>Search</button>
+
+<script type=module crossorigin>
+    import '//cdn.skypack.dev/be-committed/be-committed.js';
+</script>
+```
+
+You can stick to 100% kosher HTML syntax as well:
+
+```html
+<label for=url>Enter Url</label>
+<input id=url data-be-committed='{"to": "change"}'>
+<button id=change>Search</button>
 
 <script type=module crossorigin>
     import '//cdn.skypack.dev/be-committed/be-committed.js';
