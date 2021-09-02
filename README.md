@@ -1,6 +1,6 @@
 # be-committed
 
-be-committed encapsulates and makes declarative a snippet of code that is likely found [frequently in various web site](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp). In particular, rigger a button click on keyboard "enter."
+be-committed encapsulates and makes declarative a snippet of code that is likely found [frequently in various web sites](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp). In particular, trigger a button click on keyboard "enter."
 
 <a href="https://nodei.co/npm/hypo-link/"><img src="https://nodei.co/npm/be-committed.png"></a>
 
