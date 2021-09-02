@@ -7,7 +7,7 @@ const ce = new CE<XtalDecorCore<HTMLInputElement>>({
         propDefaults:{
             upgrade: 'input',
             ifWantsToBe: 'committed',
-            virtualProps: ['to']
+            virtualProps: ['to', 'clickableElement']
         }
     },
     complexPropDefaults:{
@@ -19,15 +19,17 @@ const ce = new CE<XtalDecorCore<HTMLInputElement>>({
                     //TODO:  turn xtal-decor  attach forwarded second half into reusable function.  Use it here
                     return;
                 }
-                self.addEventListener('keyup', (e: KeyboardEvent) =>{
-                    if(e.key === 'Enter'){
-                        e.preventDefault();
-                        clickableElement.click()
-                    }
-                    
-                });
+                self.clickableElement = clickableElement;
             }
         ],
+        on:{
+            'keyup': ({self}: any, e: KeyboardEvent) => {
+                if(e.key === 'Enter'){
+                    e.preventDefault();
+                    self.clickableElement.click()
+                }
+            }
+        },
         init: (self: HTMLInputElement) => {}
     },
     superclass: XtalDecor
