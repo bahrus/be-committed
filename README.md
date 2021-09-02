@@ -16,6 +16,10 @@
 </script>
 ```
 
+Referencing the module, as shown above, only affects input elements outside any ShadowDOM realm.
+
+To affect elements within a ShadowDOM realm, add an instance of the be-committed web component inside the ShadowDOM realm.
+
 What this does:
 
 If you set focus on the input element, start typing, and click enter, it clicks on the "Search" button.
