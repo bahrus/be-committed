@@ -1,24 +1,43 @@
 {
   "name": "be-committed",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Trigger Button Click on Enter of Input Box",
+  "keywords": [
+    "web components",
+    "web component",
+    "custom elements",
+    "custom element",
+    "built-in"
+  ],
+  "main": "be-committed.js",
+  "module": "be-committed.js",
+  "exports": {
+    ".": "./be-committed.js",
+    "./be-committed.js": "./be-committed.js"
+  },
+  "files": [
+    "be-*.*",
+    "types.d.ts"
+  ],
+  "types": "./types.d.ts",
   "dependencies": {
     "xtal-decor": "0.0.36",
     "trans-render": "0.0.372"
   },
   "devDependencies": {
-    "xtal-test": "0.0.51"
+    "xtal-test": "0.0.51",
+    "@skypack/package-check": "0.2.2"
   },
   "scripts": {
     "serve": "node node_modules/xtal-test/serve.js",
+    "package-check": "package-check",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-committed.git"
   },
-  "author": "",
+  "author": "anderson.bruce.b@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/be-committed/issues"
