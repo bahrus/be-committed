@@ -33,7 +33,7 @@ export interface BeCommittedController extends BeCommittedProps{}
 const tagName = 'be-committed';
 define<BeCommittedProps & BeDecoratedProps, BeCommittedActions>({
     config:{
-        tagName: tagName,
+        tagName,
         propDefaults:{
             virtualProps: ['to'],
             upgrade: 'input',
