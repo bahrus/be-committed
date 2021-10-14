@@ -22,7 +22,8 @@
   "types": "./types.d.ts",
   "dependencies": {
     "xtal-decor": "0.0.36",
-    "trans-render": "0.0.372"
+    "trans-render": "0.0.419",
+    "be-decorated": "0.0.5"
   },
   "devDependencies": {
     "xtal-test": "0.0.51",
