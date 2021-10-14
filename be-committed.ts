@@ -1,37 +1,55 @@
-import {XtalDecor, XtalDecorCore} from 'xtal-decor/xtal-decor.js';
-import {CE} from 'trans-render/lib/CE.js';
+import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
+import {BeCommittedProps, BeCommittedActions} from './types';
+import {nudge} from 'trans-render/lib/nudge.js';
 
-const ce = new CE<XtalDecorCore<HTMLInputElement>>({
+export class BeCommittedController{
+    #proxy: any | undefined;
+    clickableElementRef: WeakRef<HTMLElement> | undefined;
+    intro(self: any, inp: HTMLInputElement){
+        this.#proxy = self;
+        inp.addEventListener('keyup', this.handleKeyup);
+
+    }
+
+    onTo({to}: this){
+        const clickableElement = (this.#proxy.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
+        if(clickableElement === null){
+            console.error('Unable to locate target');
+            return;
+        }
+        nudge(this.#proxy);
+        this.clickableElementRef = new WeakRef<HTMLElement>(clickableElement);
+    }
+
+    handleKeyup = (e: KeyboardEvent) => {
+        if(e.key === 'Enter'){
+            const clickableElement = this.clickableElementRef?.deref();
+            if(clickableElement === undefined) return;
+            e.preventDefault();
+            clickableElement.click();
+        }
+    }
+}
+
+export interface BeCommittedController extends BeCommittedProps{}
+const tagName = 'be-committed';
+define<BeCommittedProps & BeDecoratedProps, BeCommittedActions>({
     config:{
-        tagName: 'be-committed',
+        tagName: tagName,
         propDefaults:{
+            virtualProps: ['to'],
             upgrade: 'input',
             ifWantsToBe: 'committed',
-            virtualProps: ['to', 'clickableElement']
+            intro: 'intro'
+        },
+        actions:{
+            'onTo':{
+                ifAllOf: ['to']
+            }
         }
     },
     complexPropDefaults:{
-        actions:[
-            ({to, self}: any) => {
-                const clickableElement = (self.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
-                if(clickableElement === null){
-                    console.error('Unable to locate target');
-                    //TODO:  turn xtal-decor  attach forwarded second half into reusable function.  Use it here
-                    return;
-                }
-                self.clickableElement = clickableElement;
-            }
-        ],
-        on:{
-            'keyup': ({self}: any, e: KeyboardEvent) => {
-                if(e.key === 'Enter'){
-                    e.preventDefault();
-                    self.clickableElement.click()
-                }
-            }
-        },
-        init: (self: HTMLInputElement) => {}
-    },
-    superclass: XtalDecor
+        controller: BeCommittedController
+    }
 });
-document.head.appendChild(document.createElement('be-committed'));
+document.head.appendChild(document.createElement(tagName));

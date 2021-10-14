@@ -1,36 +1,49 @@
-import { XtalDecor } from 'xtal-decor/xtal-decor.js';
-import { CE } from 'trans-render/lib/CE.js';
-const ce = new CE({
+import { define } from 'be-decorated/be-decorated.js';
+import { nudge } from 'trans-render/lib/nudge.js';
+export class BeCommittedController {
+    #proxy;
+    clickableElementRef;
+    intro(self, inp) {
+        this.#proxy = self;
+        inp.addEventListener('keyup', this.handleKeyup);
+    }
+    onTo({ to }) {
+        const clickableElement = this.#proxy.getRootNode().querySelector('#' + to);
+        if (clickableElement === null) {
+            console.error('Unable to locate target');
+            return;
+        }
+        nudge(this.#proxy);
+        this.clickableElementRef = new WeakRef(clickableElement);
+    }
+    handleKeyup = (e) => {
+        if (e.key === 'Enter') {
+            const clickableElement = this.clickableElementRef?.deref();
+            if (clickableElement === undefined)
+                return;
+            e.preventDefault();
+            clickableElement.click();
+        }
+    };
+}
+const tagName = 'be-committed';
+define({
     config: {
-        tagName: 'be-committed',
+        tagName: tagName,
         propDefaults: {
+            virtualProps: ['to'],
             upgrade: 'input',
             ifWantsToBe: 'committed',
-            virtualProps: ['to', 'clickableElement']
+            intro: 'intro'
+        },
+        actions: {
+            'onTo': {
+                ifAllOf: ['to']
+            }
         }
     },
     complexPropDefaults: {
-        actions: [
-            ({ to, self }) => {
-                const clickableElement = self.getRootNode().querySelector('#' + to);
-                if (clickableElement === null) {
-                    console.error('Unable to locate target');
-                    //TODO:  turn xtal-decor  attach forwarded second half into reusable function.  Use it here
-                    return;
-                }
-                self.clickableElement = clickableElement;
-            }
-        ],
-        on: {
-            'keyup': ({ self }, e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    self.clickableElement.click();
-                }
-            }
-        },
-        init: (self) => { }
-    },
-    superclass: XtalDecor
+        controller: BeCommittedController
+    }
 });
-document.head.appendChild(document.createElement('be-committed'));
+document.head.appendChild(document.createElement(tagName));
