@@ -3,21 +3,19 @@ import {BeCommittedProps, BeCommittedActions} from './types';
 import {nudge} from 'trans-render/lib/nudge.js';
 
 export class BeCommittedController{
-    #proxy: any | undefined;
     clickableElementRef: WeakRef<HTMLElement> | undefined;
     intro(self: any, inp: HTMLInputElement){
-        this.#proxy = self;
         inp.addEventListener('keyup', this.handleKeyup);
 
     }
 
     onTo({to}: this){
-        const clickableElement = (this.#proxy.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
+        const clickableElement = (this.proxy.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
         if(clickableElement === null){
             console.error('Unable to locate target');
             return;
         }
-        nudge(this.#proxy);
+        nudge(this.proxy);
         this.clickableElementRef = new WeakRef<HTMLElement>(clickableElement);
     }
 
