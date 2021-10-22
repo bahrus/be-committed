@@ -1,5 +1,6 @@
 import { define } from 'be-decorated/be-decorated.js';
 import { nudge } from 'trans-render/lib/nudge.js';
+import { register } from 'be-hive/register.js';
 export class BeCommittedController {
     clickableElementRef;
     intro(self, inp) {
@@ -25,13 +26,15 @@ export class BeCommittedController {
     };
 }
 const tagName = 'be-committed';
+const ifWantsToBe = 'committed';
+const upgrade = 'input';
 define({
     config: {
-        tagName: tagName,
+        tagName,
         propDefaults: {
             virtualProps: ['to'],
             upgrade: 'input',
-            ifWantsToBe: 'committed',
+            ifWantsToBe,
             intro: 'intro'
         },
         actions: {
@@ -44,4 +47,4 @@ define({
         controller: BeCommittedController
     }
 });
-document.head.appendChild(document.createElement(tagName));
+register(ifWantsToBe, upgrade, tagName);

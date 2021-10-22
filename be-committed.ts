@@ -1,6 +1,7 @@
 import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
 import {BeCommittedProps, BeCommittedActions} from './types';
 import {nudge} from 'trans-render/lib/nudge.js';
+import {register} from 'be-hive/register.js';
 
 export class BeCommittedController{
     clickableElementRef: WeakRef<HTMLElement> | undefined;
@@ -31,13 +32,15 @@ export class BeCommittedController{
 
 export interface BeCommittedController extends BeCommittedProps{}
 const tagName = 'be-committed';
+const ifWantsToBe = 'committed';
+const upgrade = 'input';
 define<BeCommittedProps & BeDecoratedProps, BeCommittedActions>({
     config:{
         tagName,
         propDefaults:{
             virtualProps: ['to'],
             upgrade: 'input',
-            ifWantsToBe: 'committed',
+            ifWantsToBe,
             intro: 'intro'
         },
         actions:{
@@ -50,4 +53,4 @@ define<BeCommittedProps & BeDecoratedProps, BeCommittedActions>({
         controller: BeCommittedController
     }
 });
-document.head.appendChild(document.createElement(tagName));
+register(ifWantsToBe, upgrade, tagName);
