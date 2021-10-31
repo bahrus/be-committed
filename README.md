@@ -32,7 +32,7 @@ You can stick to 100% kosher HTML syntax as well:
 
 Referencing the module, as shown above, only affects input elements outside any ShadowDOM realm.
 
-To affect elements within a ShadowDOM realm, add an instance of the be-committed web component inside the ShadowDOM realm.  Or use [be-hive](https://github.com/bahrus/be-hive) for a more elegant approach.
+To affect elements within a ShadowDOM realm, add an instance the tag ["be-hive"](https://github.com/bahrus/be-hive) within the ShadowDOM realm.  
 
 What this does:
 
