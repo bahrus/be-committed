@@ -33,9 +33,10 @@ define({
         tagName,
         propDefaults: {
             virtualProps: ['to'],
-            upgrade: 'input',
+            upgrade,
             ifWantsToBe,
-            intro: 'intro'
+            intro: 'intro',
+            primaryProp: 'to'
         },
         actions: {
             'onTo': {

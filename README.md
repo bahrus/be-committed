@@ -22,8 +22,8 @@ You can stick to 100% kosher HTML syntax as well:
 
 ```html
 <label for=url>Enter Url</label>
-<input id=url data-be-committed='{"to": "change"}'>
-<button id=change>Search</button>
+<input id=url data-be-committed=to-change>
+<button id=to-change>Search</button>
 
 <script type=module crossorigin>
     import '//cdn.skypack.dev/be-committed/be-committed.js';
@@ -32,7 +32,7 @@ You can stick to 100% kosher HTML syntax as well:
 
 Referencing the module, as shown above, only affects input elements outside any ShadowDOM realm.
 
-To affect elements within a ShadowDOM realm, add an instance of the be-committed web component inside the ShadowDOM realm.
+To affect elements within a ShadowDOM realm, add an instance of the be-committed web component inside the ShadowDOM realm.  Or use [be-hive](https://github.com/bahrus/be-hive) for a more elegant approach.
 
 What this does:
 
