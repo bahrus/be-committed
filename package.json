@@ -21,13 +21,13 @@
   ],
   "types": "./types.d.ts",
   "dependencies": {
-    "trans-render": "0.0.427",
-    "xtal-element": "0.0.452",
-    "be-decorated": "0.0.37",
-    "be-hive": "0.0.8"
+    "trans-render": "0.0.448",
+    "xtal-element": "0.0.462",
+    "be-decorated": "0.0.65",
+    "be-hive": "0.0.20"
   },
   "devDependencies": {
-    "xtal-test": "0.0.51",
+    "xtal-test": "0.0.54",
     "@skypack/package-check": "0.2.2"
   },
   "scripts": {
