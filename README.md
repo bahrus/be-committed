@@ -2,9 +2,11 @@
 
 be-committed encapsulates and makes declarative a snippet of code that is likely found [frequently in various web sites](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp). In particular, trigger a button click on keyboard "enter."
 
-<a href="https://nodei.co/npm/hypo-link/"><img src="https://nodei.co/npm/be-committed.png"></a>
+[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-committed?style=for-the-badge)](https://bundlephobia.com/result?p=be-committed)
 
-<img src="https://badgen.net/bundlephobia/minzip/be-committed">
+<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-committed?compression=gzip">
+
+<a href="https://nodei.co/npm/be-committed/"><img src="https://nodei.co/npm/be-committed.png"></a>
 
 ## Syntax
 
