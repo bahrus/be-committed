@@ -38,6 +38,14 @@ What this does:
 
 If you set focus on the input element, start typing, and click enter, it clicks on the "Search" button.
 
+## CDN
+
+```html
+<script type=module>
+    import 'https://esm.run/be-committed'
+</script>
+```
+
 
 ## Running locally
 
