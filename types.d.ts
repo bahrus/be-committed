@@ -1,24 +1,21 @@
 import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 
-export interface BeCommittedEndUserProps {
+export interface EndUserProps {
     to: string;
 }
 
-export interface BeCommittedVirtualProps extends BeCommittedEndUserProps, MinimalProxy {}
+export interface VirtualProps extends EndUserProps, MinimalProxy {}
 
-export type Proxy = Element & BeCommittedVirtualProps;
+export type Proxy = Element & VirtualProps;
 
-export interface ProxyProps extends BeCommittedVirtualProps{
+export interface ProxyProps extends VirtualProps{
     proxy: Proxy
 }
 
 export type PP = ProxyProps;
 
-export interface BeCommittedProps{
-    proxy: HTMLInputElement & BeCommittedVirtualProps;
-}
 
-export interface BeCommittedActions{
+export interface Actions{
     onTo(pp: PP): void;
     intro(proxy: Proxy, target: HTMLInputElement, beDecorProps: BeDecoratedProps): void;
 }

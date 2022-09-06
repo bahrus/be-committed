@@ -1,9 +1,9 @@
 import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
-import {BeCommittedProps, BeCommittedActions, BeCommittedVirtualProps, Proxy, PP} from './types';
+import {Actions, VirtualProps, Proxy, PP} from './types';
 import {nudge} from 'trans-render/lib/nudge.js';
 import {register} from 'be-hive/register.js';
 
-export class BeCommitted extends EventTarget implements BeCommittedActions{
+export class BeCommitted extends EventTarget implements Actions{
 
     clickableElementRef: WeakRef<HTMLElement> | undefined;
     intro(proxy: Proxy, target: HTMLInputElement, beDecorProps: BeDecoratedProps){
@@ -36,7 +36,7 @@ export class BeCommitted extends EventTarget implements BeCommittedActions{
 const tagName = 'be-committed';
 const ifWantsToBe = 'committed';
 const upgrade = 'input';
-define<BeCommittedVirtualProps & BeDecoratedProps<BeCommittedVirtualProps, BeCommittedActions>, BeCommittedActions>({
+define<VirtualProps & BeDecoratedProps<VirtualProps, Actions>, Actions>({
     config:{
         tagName,
         propDefaults:{
