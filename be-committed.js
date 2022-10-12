@@ -1,5 +1,4 @@
-import { define } from 'be-decorated/be-decorated.js';
-import { nudge } from 'trans-render/lib/nudge.js';
+import { define } from 'be-decorated/DE.js';
 import { register } from 'be-hive/register.js';
 export class BeCommitted extends EventTarget {
     clickableElementRef;
@@ -7,13 +6,16 @@ export class BeCommitted extends EventTarget {
         target.addEventListener('keyup', this.handleKeyup);
         proxy.resolved = true;
     }
-    onTo({ to, proxy }) {
+    async onTo({ to, proxy, nudge: n }) {
         const clickableElement = proxy.getRootNode().querySelector('#' + to);
         if (clickableElement === null) {
             console.error('Unable to locate target');
             return;
         }
-        nudge(proxy);
+        if (n) {
+            const { nudge } = await import('trans-render/lib/nudge.js');
+            nudge(proxy);
+        }
         this.clickableElementRef = new WeakRef(clickableElement);
     }
     handleKeyup = (e) => {
@@ -33,16 +35,17 @@ define({
     config: {
         tagName,
         propDefaults: {
-            virtualProps: ['to'],
+            virtualProps: ['to', 'nudge'],
             upgrade,
             ifWantsToBe,
             intro: 'intro',
-            primaryProp: 'to'
+            primaryProp: 'to',
+            proxyPropDefaults: {
+                nudge: true,
+            }
         },
         actions: {
-            'onTo': {
-                ifAllOf: ['to']
-            }
+            'onTo': 'to'
         }
     },
     complexPropDefaults: {

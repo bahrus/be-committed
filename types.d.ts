@@ -2,6 +2,7 @@ import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 
 export interface EndUserProps {
     to: string;
+    nudge: boolean;
 }
 
 export interface VirtualProps extends EndUserProps, MinimalProxy {}
@@ -9,7 +10,7 @@ export interface VirtualProps extends EndUserProps, MinimalProxy {}
 export type Proxy = Element & VirtualProps;
 
 export interface ProxyProps extends VirtualProps{
-    proxy: Proxy
+    proxy: Proxy;
 }
 
 export type PP = ProxyProps;

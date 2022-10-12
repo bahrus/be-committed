@@ -1,6 +1,6 @@
-import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
-import {Actions, VirtualProps, Proxy, PP} from './types';
-import {nudge} from 'trans-render/lib/nudge.js';
+import {define} from 'be-decorated/DE.js';
+import {BeDecoratedProps} from 'be-decorated/types.js';
+import {Actions, VirtualProps, Proxy, PP, ProxyProps} from './types';
 import {register} from 'be-hive/register.js';
 
 export class BeCommitted extends EventTarget implements Actions{
@@ -11,13 +11,17 @@ export class BeCommitted extends EventTarget implements Actions{
         proxy.resolved = true;
     }
 
-    onTo({to, proxy}: PP){
+    async onTo({to, proxy, nudge: n}: PP){
         const clickableElement = (proxy.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
         if(clickableElement === null){
             console.error('Unable to locate target');
             return;
         }
-        nudge(proxy);
+        if(n){
+            const {nudge} = await import('trans-render/lib/nudge.js');
+            nudge(proxy);
+        }
+
         this.clickableElementRef = new WeakRef<HTMLElement>(clickableElement);
     }
 
@@ -29,6 +33,7 @@ export class BeCommitted extends EventTarget implements Actions{
             clickableElement.click();
         }
     }
+
 }
 
 
@@ -40,16 +45,17 @@ define<VirtualProps & BeDecoratedProps<VirtualProps, Actions>, Actions>({
     config:{
         tagName,
         propDefaults:{
-            virtualProps: ['to'],
+            virtualProps: ['to', 'nudge'],
             upgrade,
             ifWantsToBe,
             intro: 'intro',
-            primaryProp: 'to'
+            primaryProp: 'to',
+            proxyPropDefaults:{
+                nudge: true,
+            }
         },
         actions:{
-            'onTo':{
-                ifAllOf: ['to']
-            }
+            'onTo': 'to'
         }
     },
     complexPropDefaults:{

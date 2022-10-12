@@ -16,18 +16,17 @@
     "./be-committed.js": "./be-committed.js"
   },
   "files": [
-    "be-*.*",
-    "types.d.ts"
+    "*.*"
   ],
   "types": "./types.d.ts",
   "dependencies": {
-    "trans-render": "0.0.585",
-    "xtal-element": "0.0.517",
-    "be-decorated": "0.0.153",
-    "be-hive": "0.0.63"
+    "trans-render": "0.0.625",
+    "xtal-element": "0.0.529",
+    "be-decorated": "0.0.168",
+    "be-hive": "0.0.72"
   },
   "devDependencies": {
-    "may-it-serve": "0.0.2",
+    "may-it-serve": "0.0.3",
     "@skypack/package-check": "0.2.2"
   },
   "scripts": {
