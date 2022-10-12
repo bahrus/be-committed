@@ -22,17 +22,18 @@
   "dependencies": {
     "trans-render": "0.0.625",
     "xtal-element": "0.0.529",
-    "be-decorated": "0.0.168",
+    "be-decorated": "0.0.169",
     "be-hive": "0.0.72"
   },
   "devDependencies": {
     "may-it-serve": "0.0.3",
+    "@playwright/test": "1.27.1",
     "@skypack/package-check": "0.2.2"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",
     "package-check": "package-check",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test"
   },
   "repository": {
     "type": "git",
