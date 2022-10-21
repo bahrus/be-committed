@@ -7,8 +7,8 @@ export class BeCommitted extends EventTarget implements Actions{
 
     #clickableElementRef: WeakRef<HTMLElement> | undefined;
 
-    hydrate({self, on}: PP): PE {
-        return [{resolved: true}, {handleCommit: {on, of: self}}]
+    hydrate({self: of, on}: PP): PE {
+        return [{resolved: true}, {handleCommit: {on, of}}]
     }
 
     handleCommit(pp: PP, e: KeyboardEvent): void {
@@ -20,15 +20,15 @@ export class BeCommitted extends EventTarget implements Actions{
         }
     }
 
-    async findTarget({to, proxy, nudge}: PP){
-        const clickableElement = (proxy.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
+    async findTarget({to, self, nudge}: PP){
+        const clickableElement = (self.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
         if(clickableElement === null){
             console.error('Unable to locate target');
             return;
         }
         if(nudge){
             const {nudge: n} = await import('trans-render/lib/nudge.js');
-            n(proxy);
+            n(self);
         }
 
         this.#clickableElementRef = new WeakRef<HTMLElement>(clickableElement);

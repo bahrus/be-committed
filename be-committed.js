@@ -2,8 +2,8 @@ import { define } from 'be-decorated/DE.js';
 import { register } from 'be-hive/register.js';
 export class BeCommitted extends EventTarget {
     #clickableElementRef;
-    hydrate({ self, on }) {
-        return [{ resolved: true }, { handleCommit: { on, of: self } }];
+    hydrate({ self: of, on }) {
+        return [{ resolved: true }, { handleCommit: { on, of } }];
     }
     handleCommit(pp, e) {
         if (e.key === 'Enter') {
@@ -14,15 +14,15 @@ export class BeCommitted extends EventTarget {
             clickableElement.click();
         }
     }
-    async findTarget({ to, proxy, nudge }) {
-        const clickableElement = proxy.getRootNode().querySelector('#' + to);
+    async findTarget({ to, self, nudge }) {
+        const clickableElement = self.getRootNode().querySelector('#' + to);
         if (clickableElement === null) {
             console.error('Unable to locate target');
             return;
         }
         if (nudge) {
             const { nudge: n } = await import('trans-render/lib/nudge.js');
-            n(proxy);
+            n(self);
         }
         this.#clickableElementRef = new WeakRef(clickableElement);
     }
