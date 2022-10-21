@@ -9,8 +9,8 @@
     "custom element",
     "built-in"
   ],
-  "main": "index.js",
-  "module": "index.js",
+  "main": "be-committed.js",
+  "module": "be-committed.js",
   "exports": {
     ".": "./index.js",
     "./trPlugIn.js": "./trPlugIn.js",
@@ -22,7 +22,7 @@
   "types": "./types.d.ts",
   "dependencies": {
     "trans-render": "0.0.628",
-    "be-decorated": "0.0.185",
+    "be-decorated": "0.0.186",
     "be-hive": "0.0.76"
   },
   "devDependencies": {
