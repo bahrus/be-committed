@@ -9,10 +9,11 @@
     "custom element",
     "built-in"
   ],
-  "main": "be-committed.js",
-  "module": "be-committed.js",
+  "main": "index.js",
+  "module": "index.js",
   "exports": {
-    ".": "./be-committed.js",
+    ".": "./index.js",
+    "./trPlugIn.js": "./trPlugIn.js",
     "./be-committed.js": "./be-committed.js"
   },
   "files": [
