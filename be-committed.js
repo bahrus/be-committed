@@ -1,32 +1,31 @@
 import { define } from 'be-decorated/DE.js';
 import { register } from 'be-hive/register.js';
 export class BeCommitted extends EventTarget {
-    clickableElementRef;
-    intro(proxy, target, beDecorProps) {
-        target.addEventListener('keyup', this.handleKeyup);
-        proxy.resolved = true;
+    #clickableElementRef;
+    hydrate({ self, on }) {
+        return [{ resolved: true }, { handleCommit: { on, of: self } }];
     }
-    async onTo({ to, proxy, nudge: n }) {
-        const clickableElement = proxy.getRootNode().querySelector('#' + to);
-        if (clickableElement === null) {
-            console.error('Unable to locate target');
-            return;
-        }
-        if (n) {
-            const { nudge } = await import('trans-render/lib/nudge.js');
-            nudge(proxy);
-        }
-        this.clickableElementRef = new WeakRef(clickableElement);
-    }
-    handleKeyup = (e) => {
+    handleCommit(pp, e) {
         if (e.key === 'Enter') {
-            const clickableElement = this.clickableElementRef?.deref();
+            const clickableElement = this.#clickableElementRef?.deref();
             if (clickableElement === undefined)
                 return;
             e.preventDefault();
             clickableElement.click();
         }
-    };
+    }
+    async findTarget({ to, proxy, nudge }) {
+        const clickableElement = proxy.getRootNode().querySelector('#' + to);
+        if (clickableElement === null) {
+            console.error('Unable to locate target');
+            return;
+        }
+        if (nudge) {
+            const { nudge: n } = await import('trans-render/lib/nudge.js');
+            n(proxy);
+        }
+        this.#clickableElementRef = new WeakRef(clickableElement);
+    }
 }
 const tagName = 'be-committed';
 const ifWantsToBe = 'committed';
@@ -35,17 +34,18 @@ define({
     config: {
         tagName,
         propDefaults: {
-            virtualProps: ['to', 'nudge'],
+            virtualProps: ['on', 'to', 'nudge'],
             upgrade,
             ifWantsToBe,
-            intro: 'intro',
             primaryProp: 'to',
             proxyPropDefaults: {
                 nudge: true,
+                on: 'keyup'
             }
         },
         actions: {
-            'onTo': 'to'
+            hydrate: 'on',
+            findTarget: 'to'
         }
     },
     complexPropDefaults: {

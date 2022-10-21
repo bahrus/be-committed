@@ -1,37 +1,37 @@
 import {define} from 'be-decorated/DE.js';
 import {BeDecoratedProps} from 'be-decorated/types.js';
-import {Actions, VirtualProps, Proxy, PP, ProxyProps} from './types';
+import {Actions, VirtualProps, Proxy, PP, PE, ProxyProps} from './types';
 import {register} from 'be-hive/register.js';
 
 export class BeCommitted extends EventTarget implements Actions{
 
-    clickableElementRef: WeakRef<HTMLElement> | undefined;
-    intro(proxy: Proxy, target: HTMLInputElement, beDecorProps: BeDecoratedProps){
-        target.addEventListener('keyup', this.handleKeyup);
-        proxy.resolved = true;
+    #clickableElementRef: WeakRef<HTMLElement> | undefined;
+
+    hydrate({self, on}: PP): PE {
+        return [{resolved: true}, {handleCommit: {on, of: self}}]
     }
 
-    async onTo({to, proxy, nudge: n}: PP){
+    handleCommit(pp: PP, e: KeyboardEvent): void {
+        if(e.key === 'Enter'){
+            const clickableElement = this.#clickableElementRef?.deref();
+            if(clickableElement === undefined) return;
+            e.preventDefault();
+            clickableElement.click();
+        }
+    }
+
+    async findTarget({to, proxy, nudge}: PP){
         const clickableElement = (proxy.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
         if(clickableElement === null){
             console.error('Unable to locate target');
             return;
         }
-        if(n){
-            const {nudge} = await import('trans-render/lib/nudge.js');
-            nudge(proxy);
+        if(nudge){
+            const {nudge: n} = await import('trans-render/lib/nudge.js');
+            n(proxy);
         }
 
-        this.clickableElementRef = new WeakRef<HTMLElement>(clickableElement);
-    }
-
-    handleKeyup = (e: KeyboardEvent) => {
-        if(e.key === 'Enter'){
-            const clickableElement = this.clickableElementRef?.deref();
-            if(clickableElement === undefined) return;
-            e.preventDefault();
-            clickableElement.click();
-        }
+        this.#clickableElementRef = new WeakRef<HTMLElement>(clickableElement);
     }
 
 }
@@ -45,17 +45,18 @@ define<VirtualProps & BeDecoratedProps<VirtualProps, Actions>, Actions>({
     config:{
         tagName,
         propDefaults:{
-            virtualProps: ['to', 'nudge'],
+            virtualProps: ['on', 'to', 'nudge'],
             upgrade,
             ifWantsToBe,
-            intro: 'intro',
             primaryProp: 'to',
             proxyPropDefaults:{
                 nudge: true,
+                on: 'keyup'
             }
         },
         actions:{
-            'onTo': 'to'
+            hydrate: 'on',
+            findTarget: 'to'
         }
     },
     complexPropDefaults:{
