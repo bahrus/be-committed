@@ -1,4 +1,3 @@
-import { attach } from 'be-decorated/upgrade.js';
 import { register } from 'trans-render/lib/pluginMgr.js';
 export const trPlugin = {
     selector: 'beCommittedAttribs',
@@ -6,6 +5,7 @@ export const trPlugin = {
     processor: async ({ target, val, attrib, host }) => {
         if (customElements.get('be-committed') === undefined)
             return;
+        const { attach } = await import('be-decorated/upgrade.js');
         const instance = document.createElement('be-committed');
         attach(target, 'committed', instance.attach.bind(instance));
     }
