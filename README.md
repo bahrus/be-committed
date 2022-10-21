@@ -19,7 +19,7 @@ be-committed encapsulates and makes declarative a snippet of code that is likely
 <button id=change>Search</button>
 
 <script type=module crossorigin>
-    import '//cdn.skypack.dev/be-committed/be-committed.js';
+    import 'https://esm.run/be-committed';
 </script>
 ```
 
@@ -31,7 +31,7 @@ You can stick to 100% kosher HTML syntax as well:
 <button id=to-change>Search</button>
 
 <script type=module crossorigin>
-    import '//cdn.skypack.dev/be-committed/be-committed.js';
+    import 'https://esm.run/be-committed';
 </script>
 ```
 
