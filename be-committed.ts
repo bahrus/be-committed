@@ -11,8 +11,11 @@ export class BeCommitted extends EventTarget implements Actions{
         return [{resolved: true}, {handleCommit: {on, of}}]
     }
 
-    handleCommit(pp: PP, e: KeyboardEvent): void {
+    async handleCommit(pp: PP, e: KeyboardEvent) {
         if(e.key === 'Enter'){
+            if(this.#clickableElementRef === undefined || this.#clickableElementRef?.deref() == undefined){
+                await this.findTarget(pp);
+            }
             const clickableElement = this.#clickableElementRef?.deref();
             if(clickableElement === undefined) return;
             e.preventDefault();
@@ -23,7 +26,7 @@ export class BeCommitted extends EventTarget implements Actions{
     async findTarget({to, self, nudge}: PP){
         const clickableElement = (self.getRootNode() as HTMLElement).querySelector('#' + to) as HTMLButtonElement;
         if(clickableElement === null){
-            console.error('Unable to locate target');
+            console.error('404', to);
             return;
         }
         if(nudge){

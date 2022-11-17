@@ -5,8 +5,11 @@ export class BeCommitted extends EventTarget {
     hydrate({ self: of, on }) {
         return [{ resolved: true }, { handleCommit: { on, of } }];
     }
-    handleCommit(pp, e) {
+    async handleCommit(pp, e) {
         if (e.key === 'Enter') {
+            if (this.#clickableElementRef === undefined || this.#clickableElementRef?.deref() == undefined) {
+                await this.findTarget(pp);
+            }
             const clickableElement = this.#clickableElementRef?.deref();
             if (clickableElement === undefined)
                 return;
@@ -17,7 +20,7 @@ export class BeCommitted extends EventTarget {
     async findTarget({ to, self, nudge }) {
         const clickableElement = self.getRootNode().querySelector('#' + to);
         if (clickableElement === null) {
-            console.error('Unable to locate target');
+            console.error('404', to);
             return;
         }
         if (nudge) {
