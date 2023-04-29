@@ -9,11 +9,10 @@
 		"watch": true
 	},
 	"files":[
-		"index.ts"
+		"be-committed2.ts"
 	],
 	"exclude":[
-		"build",
-		"node_modules",
+		"node_modules"
 	]
 
 }

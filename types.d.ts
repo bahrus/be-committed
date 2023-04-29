@@ -1,25 +1,25 @@
-import {BeDecoratedProps, MinimalProxy, EventConfigs} from 'be-decorated/types';
+import { ActionOnEventConfigs } from "trans-render/froop/types";
+import {IBE} from 'be-enhanced/types';
 
-export interface EndUserProps {
+export interface EndUserProps extends IBE{
     to: string;
     nudge: boolean;
     on: string;
 }
 
-export interface VirtualProps extends EndUserProps, MinimalProxy {}
+export interface AllProps extends EndUserProps {}
 
-export type Proxy = Element & VirtualProps;
+export type AP = AllProps;
 
-export interface ProxyProps extends VirtualProps{
-    proxy: Proxy;
-}
+export type PAP = Partial<AP>;
 
-export type PP = ProxyProps;
+export type ProPAP = Promise<PAP>;
 
-export type PE = [Partial<PP>, EventConfigs<Proxy, Actions>];
+export type POA = [PAP | undefined, ActionOnEventConfigs<PAP, Actions>]
+
 
 export interface Actions{
-    hydrate(pp: PP): PE;
-    findTarget(pp: PP): void;
-    handleCommit(pp: PP, e: KeyboardEvent): void;
+    hydrate(self: this): POA;
+    findTarget(self: this): Promise<void>;
+    handleCommit(self: this, e: KeyboardEvent): Promise<void>;
 }
