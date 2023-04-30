@@ -40,6 +40,7 @@ If you set focus on the input element, start typing, and click enter, it clicks 
 </script>
 ```
 
+Use of attributes is not required (for example, during [template instantiation, where use of attributes isn't optimal](https://github.com/bahrus/trans-render#extending-tr-dtr-horizontally)).
 
 ## Running locally
 
