@@ -23,17 +23,6 @@ be-committed encapsulates and makes declarative a snippet of code that is likely
 </script>
 ```
 
-You can stick to 100% kosher HTML syntax as well:
-
-```html
-<label for=url>Enter Url</label>
-<input id=url data-be-committed=to-change>
-<button id=to-change>Search</button>
-
-<script type=module crossorigin>
-    import 'https://esm.run/be-committed';
-</script>
-```
 
 Referencing the module, as shown above, only affects input elements outside any ShadowDOM realm.
 
@@ -57,23 +46,18 @@ If you set focus on the input element, start typing, and click enter, it clicks 
 1.  Do a git clone or a git fork of repository https://github.com/bahrus/be-committed
 2.  Install node.js
 3.  Run "npm install" from location of folder created in step 1.
-4.  Run npm run serve.  Open browser to http://localhost:3030/demo/dev.html
+4.  Run npm run serve.  Open browser to http://localhost:3030/demo/
 
-## import map
+## Using from ESM Module:
 
-If running locally without a bundling tool, just pure ESM modules, the following needs to be included in your html file:
-
-```html
-<script type=importmap>
-    {
-        "imports": {
-            "xtal-element/": "../node_modules/xtal-element/",
-            "trans-render/": "../node_modules/trans-render/",
-            "be-decorated/": "../node_modules/be-decorated/"
-        }
-    }
-</script>
+```JavaScript
+import 'be-committed/be-committed.js';
 ```
 
-A [polyfill](https://github.com/guybedford/es-module-shims) is required for browsers that don't yet support import maps.
+## Using from CDN:
 
+```html
+<script type=module crossorigin=anonymous>
+    import 'https://esm.run/be-committed';
+</script>
+```
