@@ -12,7 +12,7 @@
   "main": "be-committed.js",
   "module": "be-committed.js",
   "exports": {
-    ".": "./index.js",
+    ".": "./be-committed.js",
     "./be-committed.js": "./be-committed.js"
   },
   "files": [
