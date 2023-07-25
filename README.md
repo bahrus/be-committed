@@ -44,10 +44,15 @@ Use of attributes is not required (for example, during [template instantiation, 
 
 ## Running locally
 
-1.  Do a git clone or a git fork of repository https://github.com/bahrus/be-committed
-2.  Install node.js
-3.  Run "npm install" from location of folder created in step 1.
-4.  Run npm run serve.  Open browser to http://localhost:3030/demo/
+Any web server than can serve static files will do, but...
+
+1.  Install git.
+2.  Do a git clone or a git fork of repository https://github.com/bahrus/be-committed
+3.  Install node.js
+4.  Open command window to folder where you cloned this repo.
+5.  > npm install
+6.  > npm run serve
+7.  Open http://localhost:3030/demo/dev in a modern browser.
 
 ## Using from ESM Module:
 
