@@ -57,6 +57,7 @@ const upgrade = '*';
 const xe = new XE<AP, Actions>({
     config: {
         tagName,
+        isEnh: true,
         propDefaults: {
             ...propDefaults,
             nudge: true,
