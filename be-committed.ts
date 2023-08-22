@@ -9,7 +9,7 @@ export class BeCommitted extends BE<AP, Actions> implements Actions{
         return {
             parse: true,
             primaryProp: 'to'
-        } as BEConfig
+        } as BEConfig;
     }
 
     #clickableElementRef: WeakRef<HTMLElement> | undefined;
