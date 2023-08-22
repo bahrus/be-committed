@@ -83,7 +83,7 @@ And in practice, it is also quite ergonomic to edit these declarative web compon
 
 ## Running locally
 
-Any web server than can serve static files will do, but...
+Any web server that can serve static files will do, but...
 
 1.  Install git.
 2.  Do a git clone or a git fork of repository https://github.com/bahrus/be-committed
