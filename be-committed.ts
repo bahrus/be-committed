@@ -8,7 +8,8 @@ export class BeCommitted extends BE<AP, Actions> implements Actions{
     static  override get beConfig(){
         return {
             parse: true,
-            primaryProp: 'to'
+            primaryProp: 'to',
+            isParsedProp: 'isParsed',
         } as BEConfig;
     }
 
@@ -50,9 +51,8 @@ export class BeCommitted extends BE<AP, Actions> implements Actions{
 
 export interface BeCommitted extends AllProps{}
 
-const tagName = 'be-committed';
-const ifWantsToBe = 'committed';
-const upgrade = '*';
+export const tagName = 'be-committed';
+
 
 const xe = new XE<AP, Actions>({
     config: {
@@ -73,5 +73,3 @@ const xe = new XE<AP, Actions>({
     },
     superclass: BeCommitted
 });
-
-register(ifWantsToBe, upgrade, tagName);

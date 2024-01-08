@@ -7,7 +7,9 @@ export interface EndUserProps extends IBE{
     on: string;
 }
 
-export interface AllProps extends EndUserProps {}
+export interface AllProps extends EndUserProps {
+    isParsed?: boolean;
+}
 
 export type AP = AllProps;
 

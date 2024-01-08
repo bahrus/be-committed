@@ -1,11 +1,11 @@
 import { BE, propDefaults, propInfo } from 'be-enhanced/BE.js';
 import { XE } from 'xtal-element/XE.js';
-import { register } from 'be-hive/register.js';
 export class BeCommitted extends BE {
     static get beConfig() {
         return {
             parse: true,
-            primaryProp: 'to'
+            primaryProp: 'to',
+            isParsedProp: 'isParsed',
         };
     }
     #clickableElementRef;
@@ -40,12 +40,11 @@ export class BeCommitted extends BE {
         }
     }
 }
-const tagName = 'be-committed';
-const ifWantsToBe = 'committed';
-const upgrade = '*';
+export const tagName = 'be-committed';
 const xe = new XE({
     config: {
         tagName,
+        isEnh: true,
         propDefaults: {
             ...propDefaults,
             nudge: true,
@@ -61,4 +60,3 @@ const xe = new XE({
     },
     superclass: BeCommitted
 });
-register(ifWantsToBe, upgrade, tagName);
