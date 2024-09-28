@@ -13,8 +13,8 @@ be-committed encapsulates and makes declarative a snippet of code that is likely
 
 ```html
 <label for=url>Enter Url</label>
-<input id=url be-committed=to-change>
-<button id=to-change>Search</button>
+<input id=url be-committed-to=#change>
+<button id=change>Search</button>
 
 <script type=module crossorigin>
     import 'https://esm.run/be-committed';

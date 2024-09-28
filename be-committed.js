@@ -15,7 +15,7 @@ class BeCommitted extends BE {
      */
     static config = {
         propDefaults:{
-            on: 'input'
+            on: 'keyup'
         },
         propInfo:{
             ...propInfo,
