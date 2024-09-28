@@ -45,7 +45,7 @@ We can use a shorter name in less formal settings, where we can control conflict
 <button id=change onclick="logToConsole()">Click Here</button>
 ```
 
-See [how to define your name]().
+See [how to define your name](https://github.com/bahrus/be-committed/blob/baseline/%F0%9F%A4%9D.js).
 
 
 ## Running locally
