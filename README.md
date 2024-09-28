@@ -15,71 +15,20 @@ be-committed encapsulates and makes declarative a snippet of code that is likely
 <label for=url>Enter Url</label>
 <input id=url be-committed-to=#change>
 <button id=change>Search</button>
-
-<script type=module crossorigin>
-    import 'https://esm.run/be-committed';
-</script>
 ```
 
 What this does:
 
 If you set focus on the input element, start typing, and click enter, it clicks on the "Search" button.
 
-Alternatively:
 
-```html
-<label for=url>Enter Url</label>
-<input id=url be-committed='{"to": "change"}'>
-<button id=change>Search</button>
-
-<script type=module crossorigin>
-    import 'https://esm.run/be-committed';
-</script>
-```
-
-which is shorthand for:
-
-```html
-<label for=url>Enter Url</label>
-<input id=url be-committed='{
-    "to": "change",
-    "on": "keyup",
-    "nudge": false
-}'>
-<button id=change>Search</button>
-
-<script type=module crossorigin>
-    import 'https://esm.run/be-committed';
-</script>
-```
-
-The "nudge" setting allows for setting the disabled attribute for the input element, and the nudge setting removes the disabled attribute (or lowers the number by one if set to a number higher than 1), so we can progressively enhance the input element, activating it when ready.
+The "nudges" setting allows for setting the disabled attribute for the input element, and the nudges setting removes the disabled attribute (or lowers the number by one if set to a number higher than 1), so we can progressively enhance the input element, activating it when ready.
 
 
 Referencing the module, as shown above, only affects input elements outside any ShadowDOM realm.
 
 To affect elements within a ShadowDOM realm, add an instance the tag ["be-hive"](https://github.com/bahrus/be-hive) within the ShadowDOM realm.  
 
-
-
-## CDN
-
-```html
-<script type=module>
-    import 'https://esm.run/be-committed'
-</script>
-```
-
-Use of attributes is not required (for example, during [template instantiation, where use of attributes isn't optimal](https://github.com/bahrus/trans-render#extending-tr-dtr-horizontally)):
-
-```JavaScript
-await customElements.whenDefined('be-enhanced');
-oInput.beEnhanced.by.beCommited.to = 'change';
-```
-
-Editing JSON-in-html can be rather error prone.  A [VS Code extension](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.json-in-html) is available to help with that, and is compatible with web versions of VSCode.
-
-And in practice, it is also quite ergonomic to edit these declarative web components in a *.mjs file that executes in node as the file changes, and compiles to an html file via the [may-it-be](https://github.com/bahrus/may-it-be) compiler.  This allows the attributes to be editable with JS-like syntax.  Typescript 4.6 supports compiling mts to mjs files, which then allows typing of the attributes.
 
 ## Running locally
 
