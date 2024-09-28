@@ -25,10 +25,6 @@ class BeCommitted extends BE {
         compacts:{
             when_on_changes_invoke_hydrate: 0,
         },
-
-        actions:{
-            
-        },
         positractions: [
             resolved, rejected
         ]
@@ -56,6 +52,7 @@ class BeCommitted extends BE {
             self.nudge();
         }
         return /** @type {PAP} */({
+            resolved: true
         });
     }
 

@@ -8,7 +8,7 @@ import { BeHive, seed, MountObserver } from 'be-hive/be-hive.js';
  */
 export const emc = {
     base: 'be-committed',
-    branches: ['', 'to'],
+    branches: ['', 'to', 'nudges'],
     map: {
         '0.0': {
             instanceOf: 'Object',
@@ -17,6 +17,10 @@ export const emc = {
         '1.0': {
             instanceOf: 'String',
             mapsTo: 'to'
+        },
+        '2.0': {
+            instanceOf: 'Boolean',
+            mapsTo: 'nudges'
         }
     },
     enhPropKey: 'beCommitted',

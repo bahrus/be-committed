@@ -12,9 +12,12 @@ be-committed encapsulates and makes declarative a snippet of code that is likely
 ## Syntax
 
 ```html
-<label for=url>Enter Url</label>
-<input id=url be-committed-to=#change>
-<button id=change>Search</button>
+<label>
+    Test
+    <input be-committed-to="#change">
+</label>
+    
+<button id=change onclick="logToConsole()">Click Here</button>
 ```
 
 What this does:
@@ -27,7 +30,22 @@ The "nudges" setting allows for setting the disabled attribute for the input ele
 
 Referencing the module, as shown above, only affects input elements outside any ShadowDOM realm.
 
-To affect elements within a ShadowDOM realm, add an instance the tag ["be-hive"](https://github.com/bahrus/be-hive) within the ShadowDOM realm.  
+To affect elements within a ShadowDOM realm, add an instance the tag ["be-hive"](https://github.com/bahrus/be-hive) within the ShadowDOM realm. 
+
+## Alternative name and support for nudging
+
+We can use a shorter name in less formal settings, where we can control conflicts with other libraries:
+
+```html
+<label>
+    Test
+    <input disabled 🤝-to="#change" 🤝-nudges>
+</label>
+
+<button id=change onclick="logToConsole()">Click Here</button>
+```
+
+See [how to define your name]().
 
 
 ## Running locally
