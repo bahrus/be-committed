@@ -1,4 +1,4 @@
-# be-committed
+# be-committed (🤝)
 
 be-committed encapsulates and makes declarative a snippet of code that is likely found [frequently in various web sites](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp). In particular, trigger a button click on keyboard "enter."
 
