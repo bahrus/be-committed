@@ -42,11 +42,23 @@ We can use a shorter name in less formal settings, where we can control conflict
     <input disabled 🤝-to="#change" 🤝-nudges>
 </label>
 
-<button id=change onclick="logToConsole()">Click Here</button>
+<button disabled id=change onclick="logToConsole()">Click Here</button>
 ```
 
 See [how to define your name](https://github.com/bahrus/be-committed/blob/baseline/%F0%9F%A4%9D.js).
 
+## Default submit button if "-to" value not specified: [TODO]
+
+```html
+<form>
+    <label>
+        Test
+        <input disabled 🤝-nudges>
+    </label>
+
+    <button disabled type=submit>Continue</button>
+</form>
+```
 
 ## Running locally
 
