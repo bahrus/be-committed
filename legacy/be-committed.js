@@ -1,62 +1,73 @@
-import { BE, propDefaults, propInfo } from 'be-enhanced/BE.js';
-import { XE } from 'xtal-element/XE.js';
-export class BeCommitted extends BE {
-    static get beConfig() {
-        return {
-            parse: true,
-            primaryProp: 'to',
-            isParsedProp: 'isParsed',
-        };
-    }
-    #clickableElementRef;
-    hydrate(self) {
-        const { enhancedElement, on } = self;
-        return [{ resolved: true }, { handleCommit: { on, of: enhancedElement } }];
-    }
-    async findTarget(self) {
-        const { enhancedElement, to, nudge } = self;
-        const clickableElement = enhancedElement.getRootNode().querySelector('#' + to);
-        if (clickableElement === null) {
-            console.error('404', to);
-            return;
-        }
-        if (nudge) {
-            const { nudge: n } = await import('trans-render/lib/nudge.js');
-            n(enhancedElement);
-        }
-        this.#clickableElementRef = new WeakRef(clickableElement);
-    }
-    async handleCommit(self, e) {
-        if (e.key === 'Enter') {
-            const { enhancedElement } = self;
-            if (this.#clickableElementRef === undefined || this.#clickableElementRef?.deref() == undefined) {
-                await this.findTarget(self);
-            }
-            const clickableElement = this.#clickableElementRef?.deref();
-            if (clickableElement === undefined)
-                return;
-            e.preventDefault();
-            clickableElement.click();
-        }
-    }
-}
-export const tagName = 'be-committed';
-const xe = new XE({
-    config: {
-        tagName,
-        isEnh: true,
-        propDefaults: {
-            ...propDefaults,
-            nudge: true,
+// @ts-check
+import { BE } from 'be-enhanced/BE.js';
+import { propInfo, resolved, rejected } from 'be-enhanced/cc.js';
+
+/** @import {BEConfig, IEnhancement, BEAllProps} from '../ts-refs/be-enhanced/types' */
+/** @import {Actions, PAP, AP, BAP, ObservingParameters} from '../ts-refs/be-committed/types' */
+
+/**
+ * @implements {Actions}
+ * @implements {EventListenerObject}
+ */
+class BeCommitted extends BE {
+    /**
+     * @type {BEConfig<BAP, Actions & IEnhancement, any>}
+     */
+    static config = {
+        propDefaults:{
             on: 'keyup'
         },
-        propInfo: {
-            ...propInfo
+        propInfo:{
+            ...propInfo,
+            to: {},
+            nudges: {},
         },
-        actions: {
-            hydrate: 'on',
-            findTarget: 'to'
+        compacts:{
+            when_on_changes_call_hydrate: 0,
+        },
+        positractions: [
+            resolved, rejected
+        ]
+    }
+
+    /**
+     * @type {WeakRef<HTMLElement> | undefined}
+     */
+    #clickableElementRef;
+
+    /**
+     * 
+     * @param {BAP} self 
+     */
+    async hydrate(self){
+        const {enhancedElement, on, to, nudges} = self;
+        const {parse} = await import('trans-render/dss/parse.js');
+        const specifier = await parse(to);
+        const {find} = await import('trans-render/dss/find.js');
+        const remoteEl = await find(enhancedElement, specifier);
+        if(!(remoteEl instanceof HTMLElement)) throw 404;
+        this.#clickableElementRef = new WeakRef(remoteEl);
+        enhancedElement.addEventListener(on, this);
+        if(nudges){
+            self.nudge();
         }
-    },
-    superclass: BeCommitted
-});
+        return /** @type {PAP} */({
+            resolved: true
+        });
+    }
+
+    /**
+     * 
+     * @param {KeyboardEvent} e 
+     */
+    handleEvent(e){
+        if(e.key !== 'Enter') return;
+        const clickableElementRef = this.#clickableElementRef?.deref();
+        if(clickableElementRef === undefined) throw 404;
+        e.preventDefault();
+        clickableElementRef.click();
+    }
+}
+
+await BeCommitted.bootUp();
+export {BeCommitted}

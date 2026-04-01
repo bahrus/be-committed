@@ -1,7 +1,7 @@
 // @ts-check
 import { BeHive, seed, MountObserver } from 'be-hive/be-hive.js';
-/** @import {EMC, EventListenerOrFn} from './ts-refs/trans-render/be/types' */
-/** @import {Actions, PAP,  AP} from './ts-refs/be-committed/types' */;
+/** @import {EMC, EventListenerOrFn} from '../ts-refs/trans-render/be/types.js' */
+/** @import {Actions, PAP,  AP} from '../ts-refs/be-committed/types.js' */;
 
 /**
  * @type {Partial<EMC<any, AP>>}
