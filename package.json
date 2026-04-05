@@ -17,9 +17,10 @@
   },
   "files": [
     "*.js",
-    "types.d.ts"
+    "*.json",
+    "./types/be-committed/types.d.ts"
   ],
-  "types": "./types.d.ts",
+  "types": "./types/be-committed/types.d.ts",
   "dependencies": {
     "be-hive": "0.1.9",
     "roundabout-lib": "0.0.2"
