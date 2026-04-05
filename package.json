@@ -22,7 +22,7 @@
   "types": "./types.d.ts",
   "dependencies": {
     "be-hive": "0.1.8",
-    "roundabout-lib": "0.0.1"
+    "roundabout-lib": "0.0.2"
   },
   "devDependencies": {
     "@playwright/test": "1.59.1",

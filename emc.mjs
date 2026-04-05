@@ -1,7 +1,7 @@
 //@ts-check
 
 /** @import {EMC} from './types/mount-observer/types' */;
-/** @import {AllProps, Acions} from './types/be-committed/types' */
+/** @import {AllProps, Actions} from './types/be-committed/types' */
 /** @import {RAConfig} from './types/roundabout/types' */
 
 /**
@@ -21,9 +21,14 @@ export const emc = {
         }
     },
     customData: {
-        compacts:{
-            when_on_changes_call_hydrate: 0,
+        actions:{
+            hydrate: {
+                ifAllOf: ['on', 'to']
+            }
         },
+        compacts:{
+            when_resolved_changes_dispatch: 'resolved',
+        }
     }
 }
 
