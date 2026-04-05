@@ -14,7 +14,7 @@ be-committed encapsulates and makes declarative a snippet of code that is likely
 ```html
 <label>
     Test
-    <input be-committed-to="#change">
+    <input be-committed-to="change">
 </label>
     
 <button id=change onclick="logToConsole()">Click Here</button>
@@ -39,7 +39,7 @@ We can use a shorter name in less formal settings, where we can control conflict
 ```html
 <label>
     Test
-    <input disabled 🤝-to="#change" 🤝-nudges>
+    <input disabled 🤝-to="change" 🤝-nudges>
 </label>
 
 <button disabled id=change onclick="logToConsole()">Click Here</button>

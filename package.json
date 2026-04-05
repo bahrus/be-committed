@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "@playwright/test": "1.59.1",
-    "ssi-server": "0.0.7"
+    "spa-ssi": "0.0.27"
   },
   "scripts": {
-    "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
+    "serve": "node ./node_modules/spa-ssi/serve.js",
     "test": "playwright test",
     "safari": "npx playwright wk http://localhost:8000",
     "update": "ncu -u && npm install"
