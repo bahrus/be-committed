@@ -63,7 +63,7 @@ export class BeCommitted {
     handleEvent(e){
         if(e.key !== 'Enter') return;
         const self = this;
-        const {enhancedElement, on, to, nudges} = self;
+        const {enhancedElement, to} = self;
         const rn = /** @type {Document | ShadowRoot} */ (enhancedElement.getRootNode());
         const remoteEl = rn.getElementById(to);
         if(remoteEl === null || !('click' in remoteEl)) throw 404;
@@ -83,9 +83,10 @@ export class BeCommitted {
     async hydrate(self){
         if(this.#ac) this.#ac.abort();
         this.#ac= new AbortController();
-        const {enhancedElement, on, to, nudges} = self;
+        const {enhancedElement, on, to, nudge} = self;
         enhancedElement.addEventListener(on, this);
-        if(nudges){
+        if(nudge){
+            (await import('mount-observer/nudge.js')).nudge(enhancedElement);
             //self.nudge();
         }
         return /** @type {PAP} */({

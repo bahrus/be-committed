@@ -21,7 +21,7 @@
   ],
   "types": "./types.d.ts",
   "dependencies": {
-    "be-hive": "0.1.8",
+    "be-hive": "0.1.9",
     "roundabout-lib": "0.0.2"
   },
   "devDependencies": {

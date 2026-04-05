@@ -14,8 +14,8 @@ export const emc = {
         withAttrs: {
             base: 'be-committed',
             to: '${base}-to',
-            nudges: '${base}-nudges',
-            _nudges:{
+            nudge: '${base}-nudge',
+            _nudge:{
                 instanceOf: 'Boolean'
             }
         }

@@ -32,7 +32,7 @@ What this does:
 If you set focus on the input element, start typing, and click enter, it clicks on the "Search" button.
 
 
-The "nudges" setting allows for setting the disabled attribute for the input element, and the nudges setting removes the disabled attribute (or lowers the number by one if set to a number higher than 1), so we can progressively enhance the input element, activating it when ready.
+The "nudge" setting allows for setting the disabled attribute for the input element, and the nudge setting removes the disabled attribute (or lowers the number by one if set to a number higher than 1), so we can progressively enhance the input element, activating it when ready.
 
 
 Referencing the module, as shown above, only affects input elements outside any ShadowDOM realm.
@@ -46,7 +46,7 @@ We can use a shorter name in less formal settings, where we can control conflict
 ```html
 <label>
     Test
-    <input disabled 🤝-to="change" 🤝-nudges>
+    <input disabled 🤝-to="change" 🤝-nudge>
 </label>
 
 <button disabled id=change onclick="logToConsole()">Click Here</button>
@@ -60,7 +60,7 @@ See [how to define your name](https://github.com/bahrus/be-committed/blob/baseli
 <form>
     <label>
         Test
-        <input disabled 🤝-nudges>
+        <input disabled 🤝-nudge>
     </label>
 
     <button disabled type=submit>Continue</button>
