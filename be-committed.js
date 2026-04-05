@@ -10,7 +10,6 @@
  */
 import emc from './emc.json' with {type: 'json'};
 
-import {assignGingerly} from 'assign-gingerly/assignGingerly.js';
 
 /**
  * @implements {Actions}
