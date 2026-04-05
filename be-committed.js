@@ -10,7 +10,6 @@
  */
 import emc from './emc.json' with {type: 'json'};
 
-import {roundabout} from 'roundabout-lib/roundabout.js';
 import {assignGingerly} from 'assign-gingerly/assignGingerly.js';
 
 /**
@@ -51,8 +50,8 @@ export class BeCommitted {
             ...customData,
             vm: this,
         };
-        await roundabout(raOptions);
-        assignGingerly(self, {
+        (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
+        (await import('assign-gingerly/assignGingerly.js')).assignGingerly(self, {
             on: 'keyup',
             ...initVals
         });
