@@ -8,7 +8,7 @@
 /**
  * @type {EMC<any, AllProps, Element, RAConfig<AllProps, Actions>>}
  */
-import emc from './emc.mjs' with {type: 'json'};
+import emc from './emc.json' with {type: 'json'};
 
 import {roundabout} from 'roundabout-lib/roundabout.js';
 import {assignGingerly} from 'assign-gingerly/assignGingerly.js';
