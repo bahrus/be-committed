@@ -14,7 +14,6 @@ import {roundabout} from 'roundabout-lib/roundabout.js';
 import {assignGingerly} from 'assign-gingerly/assignGingerly.js';
 
 /**
- * @type {typeof BeCommitted & AllProps & {prototype: AllProps}}
  * @implements {Actions}
  */
 export class BeCommitted {
@@ -34,10 +33,12 @@ export class BeCommitted {
      * @param {AllProps} initVals 
      */
     constructor(enhancedElement, ctx, initVals){
-        this.#enhancedElementRef = new WeakRef(enhancedElement)
-        this.init(this, initVals);
+        this.#enhancedElementRef = new WeakRef(enhancedElement);
+        const self = /** @type {AllProps & Actions} */(/** @type {unknown} */(this));
+        self.init(self, initVals);
     }
     /**
+     * @this {AllProps & Actions}
      * @param {AllProps} self 
      * @param {PAP} initVals 
      */
@@ -58,12 +59,12 @@ export class BeCommitted {
     }
 
     /**
-     * 
+     * @this {AllProps & Actions}
      * @param {KeyboardEvent} e 
      */
     handleEvent(e){
         if(e.key !== 'Enter') return;
-        const self = /** @type {AllProps} */ (/** @type {unknown} */ (this));
+        const self = this;
         const {enhancedElement, on, to, nudges} = self;
         const rn = /** @type {Document | ShadowRoot} */ (enhancedElement.getRootNode());
         const remoteEl = rn.getElementById(to);
@@ -78,7 +79,7 @@ export class BeCommitted {
     #ac;
 
     /**
-     * 
+     * @this {AllProps & Actions & BeCommitted}
      * @param {AllProps} self 
      */
     async hydrate(self){

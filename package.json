@@ -29,6 +29,7 @@
     "spa-ssi": "0.0.27"
   },
   "scripts": {
+    "build": "node build-emc.mjs > emc.json",
     "serve": "node ./node_modules/spa-ssi/serve.js",
     "test": "playwright test",
     "safari": "npx playwright wk http://localhost:8000",

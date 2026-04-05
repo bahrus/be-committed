@@ -1,0 +1,27 @@
+{
+    "enhConfig": {
+        "enhKey": "BeCommitted",
+        "spawn": "be-committed/be-committed.js",
+        "withAttrs": {
+            "base": "be-committed",
+            "to": "${base}-to",
+            "nudges": "${base}-nudges",
+            "_nudges": {
+                "instanceOf": "Boolean"
+            }
+        }
+    },
+    "customData": {
+        "actions": {
+            "hydrate": {
+                "ifAllOf": [
+                    "on",
+                    "to"
+                ]
+            }
+        },
+        "compacts": {
+            "when_resolved_changes_dispatch": "resolved"
+        }
+    }
+}
