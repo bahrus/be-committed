@@ -21,13 +21,12 @@
   ],
   "types": "./types.d.ts",
   "dependencies": {
-    "be-enhanced": "0.0.147",
-    "be-hive": "0.0.224",
-    "trans-render": "0.0.848"
+    "be-hive": "0.1.8",
+    "roundabout-lib": "0.0.1"
   },
   "devDependencies": {
-    "@playwright/test": "1.48.0",
-    "ssi-server": "0.0.1"
+    "@playwright/test": "1.59.1",
+    "ssi-server": "0.0.7"
   },
   "scripts": {
     "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
