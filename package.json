@@ -22,8 +22,9 @@
   ],
   "types": "./types/be-committed/types.d.ts",
   "dependencies": {
-    "be-hive": "0.1.9",
-    "roundabout-lib": "0.0.2"
+    "be-hive": "0.1.11",
+    "mount-observer": "0.1.27",
+    "roundabout-lib": "0.0.7"
   },
   "devDependencies": {
     "@playwright/test": "1.59.1",

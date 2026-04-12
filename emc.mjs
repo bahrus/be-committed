@@ -23,11 +23,17 @@ export const emc = {
     customData: {
         actions:{
             hydrate: {
-                ifAllOf: ['on', 'to']
+                ifAllOf: ['on', 'to', 'enhancedElement']
             }
         },
         compacts:{
             when_resolved_changes_dispatch: 'resolved',
+        },
+        weakRef: {
+            properties: ['enhancedElement']
+        },
+        defaultPropVals: {
+            on: 'keyup'
         }
     }
 }

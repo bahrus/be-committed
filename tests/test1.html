@@ -15,9 +15,6 @@
         <div id=target></div>
     </label>
 
-    <script type=module>
-        import '/emc.js';
-    </script>
     <script>
         function passTest(){
             target.setAttribute('mark', 'good');
@@ -30,7 +27,7 @@
             runScript();
         }, 500);
     </script>
-        <be-hive>
+    <be-hive>
         <script type=emc src="be-committed/emc.mjs"></script>
     </be-hive>
     <script type=module>

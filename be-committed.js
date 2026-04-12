@@ -1,59 +1,50 @@
 //@ts-check
-/** @import {EnhancementConfig, SpawnContext, ElementEnhancementGateway} from './types/assign-gingerly/types' */;
+/** @import {ElementEnhancementGateway} from './types/assign-gingerly/types' */;
 /** @import {EMC} from './types/mount-observer/types' */;
 /** @import {RAConfig, RoundaboutOptions} from './types/roundabout/types' */
 
-/** @import { AllProps, Actions, PAP } from './types/be-committed/types' */
+/** @import { AllProps, Actions, PAP, AP } from './types/be-committed/types' */
 
 /**
  * @type {EMC<any, AllProps, Element, RAConfig<AllProps, Actions>>}
  */
 import emc from './emc.json' with {type: 'json'};
 
+const {customData} = emc;
 
 /**
  * @implements {Actions}
  */
 export class BeCommitted {
     /**
-     * @type {WeakRef<Element & ElementEnhancementGateway>}
-     */
-    #enhancedElementRef;
-    get enhancedElement(){
-        const ref = this.#enhancedElementRef.deref();
-        if(ref === undefined) throw 404;
-        return ref;
-    }
-    /**
-     * 
+     * @this {AllProps & Actions}
      * @param {Element & ElementEnhancementGateway} enhancedElement 
      * @param {*} ctx 
      * @param {AllProps} initVals 
      */
     constructor(enhancedElement, ctx, initVals){
-        this.#enhancedElementRef = new WeakRef(enhancedElement);
-        const self = /** @type {AllProps & Actions} */(/** @type {unknown} */(this));
-        self.init(self, initVals);
+        this.init(this, enhancedElement, initVals);
     }
     /**
-     * @this {AllProps & Actions}
      * @param {AllProps} self 
+     * @param {Element & ElementEnhancementGateway} enhancedElement 
      * @param {PAP} initVals 
      */
-    async init(self, initVals){
-        const {customData} = emc;
+    async init(self, enhancedElement, initVals){
+        const {defaultPropVals} = customData;
         /**
          * @type {RoundaboutOptions}
          */
         const raOptions = {
             ...customData,
-            vm: this,
+            vm: self,
+            initialPropVals: {
+                enhancedElement,
+                ...defaultPropVals,
+                ...initVals
+            }
         };
-        await (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
-        (await import('assign-gingerly/assignGingerly.js')).assignGingerly(self, {
-            on: 'keyup',
-            ...initVals
-        });
+        (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
     }
 
     /**
@@ -77,17 +68,15 @@ export class BeCommitted {
     #ac;
 
     /**
-     * @this {AllProps & Actions & BeCommitted}
-     * @param {AllProps} self 
+     * @param {AP} self 
      */
     async hydrate(self){
         if(this.#ac) this.#ac.abort();
         this.#ac= new AbortController();
-        const {enhancedElement, on, to, nudge} = self;
+        const {enhancedElement, on, nudge} = self;
         enhancedElement.addEventListener(on, this);
         if(nudge){
             (await import('mount-observer/nudge.js')).nudge(enhancedElement);
-            //self.nudge();
         }
         return /** @type {PAP} */({
             resolved: true
