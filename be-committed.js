@@ -49,7 +49,7 @@ export class BeCommitted {
             ...customData,
             vm: this,
         };
-        (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
+        await (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
         (await import('assign-gingerly/assignGingerly.js')).assignGingerly(self, {
             on: 'keyup',
             ...initVals
