@@ -74,7 +74,7 @@ export class BeCommitted {
         if(this.#ac) this.#ac.abort();
         this.#ac= new AbortController();
         const {enhancedElement, on, nudge} = self;
-        enhancedElement.addEventListener(on, this);
+        enhancedElement.addEventListener(on, this, {signal: this.#ac.signal});
         if(nudge){
             (await import('mount-observer/nudge.js')).nudge(enhancedElement);
         }
