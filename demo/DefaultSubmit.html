@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default Submit Button</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <h2>Default submit button (no "-to" specified)</h2>
+    <p>Focus on the input, type something, and press Enter. The submit button's click handler fires.</p>
+
+    <form>
+        <label>
+            Test
+            <input be-committed>
+        </label>
+
+        <button type=submit onclick="handleSubmit(event)">Continue</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        function handleSubmit(e){
+            e.preventDefault();
+            const msg = 'Submit button clicked via Enter at ' + new Date().toLocaleTimeString();
+            console.log(msg);
+            document.getElementById('output').textContent = msg;
+        }
+    </script>
+    <be-hive>
+        <script type=emc src="be-committed/emc.mjs"></script>
+    </be-hive>
+    <script type=module>
+        import 'be-hive/be-hive.js';
+    </script>
+</body>
+</html>

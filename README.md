@@ -54,18 +54,27 @@ We can use a shorter name in less formal settings, where we can control conflict
 
 See [how to define your name](https://github.com/bahrus/be-committed/blob/baseline/%F0%9F%A4%9D.js).
 
-## Default submit button if "-to" value not specified: [TODO]
+## Default submit button if "-to" value not specified
+
+When no `-to` value is specified, be-committed automatically finds the nearest ancestor `<form>` and clicks its first submit button (`<button type="submit">` or `<input type="submit">`) on Enter.
 
 ```html
 <form>
     <label>
         Test
-        <input disabled 🤝-nudge>
+        <input be-committed>
     </label>
 
-    <button disabled type=submit>Continue</button>
+    <button type=submit>Continue</button>
 </form>
 ```
+
+Browsers already support [implicit form submission](https://html.spec.whatwg.org/multipage/form-elements.html#implicit-submission) — pressing Enter in a single-line input submits the form. However, be-committed is useful in scenarios where the native behavior falls short:
+
+- **SPA form handling** — Many single-page apps call `preventDefault()` on the submit event and handle things via JavaScript. The submit button's `click` handler may contain the actual logic, and implicit submission doesn't always reach it consistently across frameworks.
+- **Forms with multiple submit buttons** — The browser picks the first submit button in tree order, but you may want to target a specific one. Combine `be-committed` (no `-to`) for the default, and `be-committed-to="other-btn"` on specific inputs that should target a different button.
+- **Non-standard form layouts** — When inputs and buttons are connected via JavaScript but don't follow the traditional `<form>` structure, or when the submit button is dynamically inserted, native implicit submission can be unreliable.
+- **Consistent cross-browser behavior** — Implicit submission has subtle differences across browsers (e.g., forms with multiple text inputs). be-committed normalizes the behavior by explicitly clicking the submit button on Enter.
 
 ## Viewing Locally
 

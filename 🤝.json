@@ -16,7 +16,6 @@
             "hydrate": {
                 "ifAllOf": [
                     "on",
-                    "to",
                     "enhancedElement"
                 ]
             }
@@ -30,7 +29,7 @@
             ]
         },
         "defaultPropVals": {
-            "on": "keyup"
+            "on": "keydown"
         }
     }
 }

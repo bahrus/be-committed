@@ -53,12 +53,21 @@ export class BeCommitted {
      */
     handleEvent(e){
         if(e.key !== 'Enter') return;
+        e.preventDefault();
+        if(e.type !== 'keydown') return;
         const self = this;
         const {enhancedElement, to} = self;
-        const rn = /** @type {Document | ShadowRoot} */ (enhancedElement.getRootNode());
-        const remoteEl = rn.getElementById(to);
+        /** @type {HTMLElement | null} */
+        let remoteEl;
+        if(to){
+            const rn = /** @type {Document | ShadowRoot} */ (enhancedElement.getRootNode());
+            remoteEl = /** @type {HTMLElement | null} */ (rn.getElementById(to));
+        } else {
+            const form = /** @type {HTMLElement} */ (enhancedElement).closest('form');
+            if(form === null) return;
+            remoteEl = form.querySelector('button[type="submit"], input[type="submit"]');
+        }
         if(remoteEl === null || !('click' in remoteEl)) throw 404;
-        e.preventDefault();
         remoteEl.click();
     }
 

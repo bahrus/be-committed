@@ -23,7 +23,7 @@ export const emc = {
     customData: {
         actions:{
             hydrate: {
-                ifAllOf: ['on', 'to', 'enhancedElement']
+                ifAllOf: ['on', 'enhancedElement']
             }
         },
         compacts:{
@@ -33,7 +33,7 @@ export const emc = {
             properties: ['enhancedElement']
         },
         defaultPropVals: {
-            on: 'keyup'
+            on: 'keydown'
         }
     }
 }
