@@ -9,7 +9,7 @@
  */
 export const emc = {
     enhConfig: {
-        enhKey: 'BeCommitted',
+        enhKey: 'beCommitted',
         spawn: 'be-committed/be-committed.js',
         withAttrs: {
             base: 'be-committed',
