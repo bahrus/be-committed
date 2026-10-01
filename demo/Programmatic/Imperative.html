@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic Imperative</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <!-- Fully imperative attachment: no attribute, no `.set` proxy -- just
+         `enh.get(emc)` plus a direct property assignment. -->
+    <label>Type, then press Enter <input id="subject" disabled></label>
+    <button id="change" onclick="console.log('clicked', this)">Click Here</button>
+    <script type=module>
+        import {defBeCommitted} from 'be-committed/def.js';
+        const emc = await defBeCommitted(document.body);
+        Object.assign(subject.enh.get(emc), {
+            nudge: true,
+            to: 'change',
+        });
+    </script>
+</body>
+</html>

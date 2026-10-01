@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Short and nudges</title>
+    <title>Nudge</title>
     <!-- #include virtual="/imports.html" -->
     <be-hive>
         <script type=emc src="be-committed/🤝.json"></script>
@@ -14,18 +13,8 @@
     </script>
 </head>
 <body>
-    <label>
-        Test
-        <input disabled 🤝-to="change" 🤝-nudge>
-    </label>
-
-    <div>Hello</div>
-    <button id=change onclick="logToConsole()">Click Here</button>
-
-    <script>
-        function logToConsole(){
-            console.log('iah');
-        }
-    </script>
+    <input id=subject disabled 🤝-to=change 🤝-nudge>
+    <button id=change onclick="target.setAttribute('mark', 'good')">Click Here</button>
+    <div id=target></div>
 </body>
 </html>

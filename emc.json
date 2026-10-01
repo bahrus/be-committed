@@ -18,6 +18,17 @@
                     "on",
                     "enhancedElement"
                 ]
+            },
+            "nudgeEnhancedElement": {
+                "ifAllOf": [
+                    "nudge",
+                    "enhancedElement"
+                ]
+            },
+            "weakenTo": {
+                "ifAllOf": [
+                    "to"
+                ]
             }
         },
         "compacts": {

@@ -20,7 +20,7 @@
             target.setAttribute('mark', 'good');
         }
         function runScript(){
-            const keyEvent = new KeyboardEvent("keyup", { key: "Enter"});
+            const keyEvent = new KeyboardEvent("keydown", { key: "Enter"});
             url.dispatchEvent(keyEvent)
         }
         setTimeout(() => {
@@ -28,7 +28,7 @@
         }, 500);
     </script>
     <be-hive>
-        <script type=emc src="be-committed/emc.mjs"></script>
+        <script type=emc src="be-committed/emc.json"></script>
     </be-hive>
     <script type=module>
         import 'be-hive/be-hive.js';

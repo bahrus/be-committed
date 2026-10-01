@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic Declarative Out Of Sequence</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <!-- Properties are set via the `.set` proxy *before* the enhancement
+         config is even registered. `.set` creates a plain placeholder and
+         defers the real spawn until `defBeCommitted` registers the config. -->
+    <input id="subject" disabled>
+    <button id="change" onclick="target.setAttribute('mark', 'good')">Click Here</button>
+    <div id="target"></div>
+    <script type=module>
+        import {defBeCommitted} from '/def.js';
+        subject.enh.set.beCommitted.nudge = true;
+        subject.enh.beCommitted.to = 'change';
+        await defBeCommitted(document.body);
+    </script>
+</body>
+</html>

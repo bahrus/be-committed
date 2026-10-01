@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic Declarative In Sequence</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <!-- No be-committed attribute at all -- the enhancement config is
+         registered first, then properties are set via the `.set` proxy. -->
+    <label>Type, then press Enter <input id="subject" disabled></label>
+    <button id="change" onclick="console.log('clicked', this)">Click Here</button>
+    <script type=module>
+        import {defBeCommitted} from 'be-committed/def.js';
+        await defBeCommitted(document.body);
+        // Only the first `.set` access per enhKey needs to go through `.set` --
+        // it triggers attachment. Later property writes can go straight to
+        // `.enh.beCommitted`.
+        subject.enh.set.beCommitted.nudge = true;
+        subject.enh.beCommitted.to = 'change';
+    </script>
+</body>
+</html>

@@ -24,6 +24,15 @@ export const emc = {
         actions:{
             hydrate: {
                 ifAllOf: ['on', 'enhancedElement']
+            },
+            // Also what makes roundabout monitor nudge -- one of roundabout's
+            // reserved names -- so a programmatic nudge = true set before the
+            // enhancement finishes spawning isn't overwritten.
+            nudgeEnhancedElement: {
+                ifAllOf: ['nudge', 'enhancedElement']
+            },
+            weakenTo: {
+                ifAllOf: ['to']
             }
         },
         compacts:{

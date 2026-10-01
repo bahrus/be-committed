@@ -1,9 +1,9 @@
 {
     "enhConfig": {
-        "enhKey": "beCommitted",
+        "enhKey": "🤝",
         "spawn": "be-committed/be-committed.js",
         "withAttrs": {
-            "base": "be-committed",
+            "base": "🤝",
             "to": "${base}-to",
             "nudge": "${base}-nudge",
             "_nudge": {
@@ -18,6 +18,17 @@
                     "on",
                     "enhancedElement"
                 ]
+            },
+            "nudgeEnhancedElement": {
+                "ifAllOf": [
+                    "nudge",
+                    "enhancedElement"
+                ]
+            },
+            "weakenTo": {
+                "ifAllOf": [
+                    "to"
+                ]
             }
         },
         "compacts": {
@@ -30,15 +41,6 @@
         },
         "defaultPropVals": {
             "on": "keydown"
-        }
-    }
-}
-{
-    "enhConfig": {
-        "enhKey": "🤝",
-        "spawn": "be-committed/be-committed.js",
-        "withAttrs": {
-            "base": "🤝"
         }
     }
 }

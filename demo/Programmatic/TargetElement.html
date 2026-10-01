@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic be-committed targetElement</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <!-- to can be the button itself, or a WeakRef to it -- neither button has an id -->
+    <input id="kitchenInput">
+    <button class="kitchen" onclick="console.log('clicked', this)">Kitchen</button>
+    <input id="porchInput">
+    <button class="porch" onclick="console.log('clicked', this)">Porch</button>
+    <script type=module>
+        import {defBeCommitted} from 'be-committed/def.js';
+        const emc = await defBeCommitted(document.body);
+        kitchenInput.enh.get(emc).to = document.querySelector('.kitchen');
+        porchInput.enh.get(emc).to = new WeakRef(document.querySelector('.porch'));
+    </script>
+</body>
+</html>

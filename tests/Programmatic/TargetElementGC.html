@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic be-committed targetElement GC</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <input id="kitchenInput">
+    <button id="kitchen">Kitchen</button>
+    <input id="porchInput">
+    <button id="porch" onclick="this.dataset.clicked = 'true'">Porch</button>
+    <script type=module>
+        import {defBeCommitted} from '/def.js';
+        const emc = await defBeCommitted(document.body);
+        // Set up inside a function scope, so this page keeps no reference of its own
+        // to #kitchen -- only the DOM (until the test removes it) and the enhancement.
+        (() => {
+            document.querySelector('#kitchenInput').enh.get(emc).to = document.querySelector('#kitchen');
+            document.querySelector('#porchInput').enh.get(emc).to = new WeakRef(document.querySelector('#porch'));
+        })();
+    </script>
+</body>
+</html>

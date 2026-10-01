@@ -13,7 +13,10 @@
   "module": "be-committed.js",
   "exports": {
     ".": "./be-committed.js",
-    "./be-committed.js": "./be-committed.js"
+    "./be-committed.js": "./be-committed.js",
+    "./def.js": "./def.js",
+    "./emc.json": "./emc.json",
+    "./🤝.json": "./🤝.json"
   },
   "files": [
     "*.js",
@@ -22,16 +25,17 @@
   ],
   "types": "./types/be-committed/types.d.ts",
   "dependencies": {
+    "assign-gingerly": "0.0.97",
     "be-hive": "0.1.18",
     "mount-observer": "0.1.53",
-    "roundabout-lib": "0.0.36"
+    "roundabout-lib": "0.0.38"
   },
   "devDependencies": {
-    "@playwright/test": "1.62.1",
+    "@playwright/test": "1.63.0",
     "spa-ssi": "0.0.28"
   },
   "scripts": {
-    "build": "node emc.mjs > emc.json  && node build-🤝.mjs > 🤝.json",
+    "build": "node emc.mjs > emc.json && node 🤝.mjs > 🤝.json",
     "serve": "node ./node_modules/spa-ssi/serve.js",
     "test": "playwright test",
     "safari": "npx playwright wk http://localhost:8000",
